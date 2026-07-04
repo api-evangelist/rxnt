@@ -1,0 +1,88 @@
+aid: rxnt
+name: RXNT
+review:
+  question: Does RXNT expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-04'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. RXNT's one documented public API - the
+    Clinical Data API (CDAPI) - is request/response REST-style JSON over HTTPS
+    (POST-only operations that return CCDS data). There is no server-push
+    transport (WebSocket or SSE) on any documented RXNT API to model.
+findings:
+  summary: |
+    RXNT does not publish a documented public WebSocket API. RXNT is a
+    cloud-based healthcare software company (ONC-certified EHR, EPCS
+    e-prescribing, practice management, medical billing, scheduling, and a
+    patient portal) sold as a per-provider SaaS subscription. The bulk of the
+    platform has no broadly published developer API; product integrations
+    (labs, radiology, billing clearinghouses) are arranged privately with
+    partners. The single documented, publicly described API is the RXNT
+    Clinical Data API (CDAPI), an ONC-mandated interface for third-party access
+    to a patient's Common Clinical Data Set (CCDS). It is JSON over HTTPS with
+    POST operations, authenticated by an RXNT-issued time-limited Token plus
+    Signature obtained from an AuthenticateUser call. No realtime,
+    bidirectional, or streaming WebSocket (ws:// or wss://) endpoint is
+    documented anywhere in RXNT's materials.
+  accessModel: |
+    Partner-gated. The CDAPI reference is public (github.com/RXNT/
+    RxNTClinicalDataAPI, archived read-only 2021-12-17), but third parties must
+    first register with RXNT (support@rxnt.com) to receive credentials before
+    they can call it. The broader EHR/eRx/PM/billing platform exposes no
+    self-serve public developer API or open developer portal.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://app2.rxnt.com/MasterIndexExternalAPIServices/masterindexexternalapi/v1
+      documented: true
+      note: >-
+        JSON request/response over HTTPS; POST-only operations returning CCDS
+        XML embedded in a JSON envelope.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: >-
+        No WebSocket endpoint is documented in the RXNT Clinical Data API
+        reference or any RXNT product/developer material as of the review date.
+    - protocol: SSE
+      scheme: https
+      documented: false
+      note: No Server-Sent Events streaming surface is documented.
+  endpointsConfirmedRest:
+    - POST https://app2.rxnt.com/MasterIndexExternalAPIServices/masterindexexternalapi/v1/authentication/AuthenticateUser
+    - POST https://app2.rxnt.com/MasterIndexExternalAPIServices/masterindexexternalapi/v1/patientdashboard/patientccd/GetV1PatientInfoByExternalPatientId
+    - POST https://app2.rxnt.com/MasterIndexExternalAPIServices/masterindexexternalapi/v1/patientdashboard/patientccd/GetPatientCCDSData
+  oncCertification:
+    - 45 CFR 170.315(g)(7) Application Access - Patient Selection
+    - 45 CFR 170.315(g)(8) Application Access - Data Category Request
+    - 45 CFR 170.315(g)(9) Application Access - All Data Request
+sources:
+  - url: https://github.com/RXNT/RxNTClinicalDataAPI
+    type: Documentation
+    note: >-
+      Clinical Data API reference - base URL, POST endpoints, auth flow, and
+      CCDS categories. All HTTPS JSON. No WebSocket mentioned. Archived
+      2021-12-17.
+  - url: https://github.com/RXNT
+    type: SourceCode
+    note: >-
+      RXNT GitHub org - mostly React/JSON-schema form tooling and forks; no
+      WebSocket or realtime API.
+  - url: https://www.rxnt.com/
+    type: Website
+    note: >-
+      Product marketing (EHR, eRx, PM, billing, scheduling, patient portal);
+      no developer API, FHIR, or WebSocket references surfaced.
+  - url: https://www.rxnt.com/pricing/
+    type: Pricing
+    note: Per-provider, per-month subscription plans. Not usage-metered API pricing.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. RXNT's only documented public API is
+    request/response JSON over HTTPS (the ONC-mandated Clinical Data API). No
+    AsyncAPI document was created because there is no server-push transport on
+    any RXNT API to model.

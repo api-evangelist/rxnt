@@ -1,0 +1,47 @@
+aid: rxnt:rxnt-plans-pricing
+name: RXNT Plans and Pricing
+description: >-
+  RXNT is sold as a per-provider, per-month software subscription rather than as
+  a metered, pay-as-you-go API. Pricing below reflects the published RXNT plans
+  as of July 2026. The RXNT Clinical Data API (CDAPI) is an ONC-mandated patient
+  data access interface available to registered third parties and is not itself a
+  separately metered or usage-priced product; API access is arranged by
+  contacting RXNT.
+url: https://www.rxnt.com/pricing/
+pricingModel: Per-provider subscription
+currency: USD
+plans:
+  - name: E-Prescribing
+    price: 665
+    unit: per provider per year
+    description: >-
+      Standalone EPCS-enabled electronic prescribing, including electronic prior
+      authorizations and connectivity to U.S. retail and mail pharmacies.
+  - name: EHR Bundle
+    price: 126
+    unit: per provider per month
+    description: >-
+      ONC-certified Electronic Health Records with integrated practice
+      management, patient portal, e-prescribing, cloud deployment, free training
+      and support, and an included AI-powered medical scribe.
+  - name: PM Bundle
+    price: 213
+    unit: per provider per month
+    description: >-
+      Practice management bundle covering scheduling, medical billing, and
+      revenue cycle management.
+  - name: Full Suite
+    price: 335
+    unit: per provider per month
+    description: >-
+      Complete platform - Practice Management, Electronic Health Records,
+      Electronic Prescribing, patient engagement, and mobile applications.
+notes:
+  - Free setup, training, data transfer, in-house support, and mobile apps are
+    included across plans per RXNT marketing.
+  - Prices are list figures published by RXNT and may vary by specialty, practice
+    size, and contract; contact RXNT sales for a quote.
+  - The Clinical Data API is provided for ONC-required third-party patient data
+    access; contact support@rxnt.com to register and obtain credentials.
+source: https://www.rxnt.com/pricing/
+lastVerified: '2026-07-04'

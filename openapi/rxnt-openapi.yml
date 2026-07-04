@@ -1,0 +1,226 @@
+openapi: 3.0.3
+info:
+  title: RXNT Clinical Data API
+  version: '1.0'
+  description: >-
+    ONC-certified Clinical Data API (CDAPI) that exposes a patient's Common
+    Clinical Data Set (CCDS) to registered third-party applications and patient
+    representatives, fulfilling ONC 2015 Edition certification criteria
+    45 CFR 170.315(g)(7) Application Access - Patient Selection,
+    (g)(8) Data Category Request, and (g)(9) All Data Request.
+
+
+    Access is partner-gated: third parties must first register with RXNT
+    (support@rxnt.com) to receive login credentials. The AuthenticateUser
+    operation returns a time-limited Token and Signature that must be supplied
+    in the body of every subsequent request. Patient clinical data is returned
+    as CCDS XML embedded (PatientCCDSXml) inside a JSON response envelope.
+
+
+    Modeled by API Evangelist from the publicly documented RXNT Clinical Data
+    API reference (github.com/RXNT/RxNTClinicalDataAPI, archived 2021-12-17).
+    Endpoint paths, methods, and field names reflect that documentation; request
+    and response schemas below are honestly modeled from the documented fields.
+  contact:
+    name: RXNT Support
+    email: support@rxnt.com
+    url: https://www.rxnt.com/
+  x-endpoints-modeled: true
+servers:
+  - url: https://app2.rxnt.com/MasterIndexExternalAPIServices/masterindexexternalapi/v1
+    description: RXNT Master Index External API (production)
+tags:
+  - name: Authentication
+    description: Obtain a time-limited token and signature.
+  - name: Clinical Data
+    description: Retrieve patient CCDS clinical data.
+paths:
+  /authentication/AuthenticateUser:
+    post:
+      operationId: authenticateUser
+      tags:
+        - Authentication
+      summary: Authenticate a registered third-party client
+      description: >-
+        Validates RXNT-issued username and password credentials and returns a
+        time-limited Token, Signature, DoctorCompanyId, and token expiry
+        details used to authenticate subsequent clinical data requests.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthenticationRequest'
+      responses:
+        '200':
+          description: Authentication result with token and signature.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationResponse'
+        '401':
+          description: Invalid credentials.
+  /patientdashboard/patientccd/GetV1PatientInfoByExternalPatientId:
+    post:
+      operationId: getPatientInfoByExternalPatientId
+      tags:
+        - Clinical Data
+      summary: Verify a patient and request CCDS data by category
+      description: >-
+        Confirms that an ExternalReferencePatientId exists (satisfying
+        45 CFR 170.315(g)(7) Patient Selection) and returns the requested CCDS
+        categories (satisfying (g)(8) Data Category Request). An optional
+        FromDate / ToDate window filters the returned clinical data. Requires a
+        valid Token and Signature obtained from AuthenticateUser.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientDataRequest'
+      responses:
+        '200':
+          description: Patient CCDS data for the requested categories.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientDataResponse'
+        '401':
+          description: Missing or expired token/signature.
+  /patientdashboard/patientccd/GetPatientCCDSData:
+    post:
+      operationId: getPatientCCDSData
+      tags:
+        - Clinical Data
+      summary: Request all available CCDS data for a patient
+      description: >-
+        Returns the complete Common Clinical Data Set for a patient (satisfying
+        45 CFR 170.315(g)(9) All Data Request). An optional FromDate / ToDate
+        window filters the returned clinical data. Requires a valid Token and
+        Signature obtained from AuthenticateUser.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientDataRequest'
+      responses:
+        '200':
+          description: Complete patient CCDS data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientDataResponse'
+        '401':
+          description: Missing or expired token/signature.
+components:
+  schemas:
+    AuthenticationRequest:
+      type: object
+      required:
+        - Username
+        - Password
+      properties:
+        Username:
+          type: string
+          description: RXNT-issued third-party client username.
+        Password:
+          type: string
+          format: password
+          description: RXNT-issued third-party client password.
+    AuthenticationResponse:
+      type: object
+      properties:
+        AppLoginId:
+          type: string
+        DoctorCompanyId:
+          type: string
+        Token:
+          type: string
+          description: Time-limited bearer token for subsequent requests.
+        Signature:
+          type: string
+          description: Signature paired with the token for request validation.
+        TokenExpiryDate:
+          type: string
+          format: date-time
+        NoOfDaysToExpire:
+          type: integer
+        ValidationStatus:
+          type: string
+        ValidationMessages:
+          type: array
+          items:
+            type: string
+    PatientDataRequest:
+      type: object
+      required:
+        - DoctorCompanyId
+        - Token
+        - Signature
+        - ExternalReferencePatientId
+      properties:
+        DoctorCompanyId:
+          type: string
+        RequestCompanyId:
+          type: string
+        Token:
+          type: string
+        Signature:
+          type: string
+        ExternalReferencePatientId:
+          type: string
+          description: External identifier for the patient to look up.
+        Categories:
+          type: array
+          description: >-
+            Optional list of CCDS categories to return. Omit for an all-data
+            (g)(9) request.
+          items:
+            type: string
+            enum:
+              - PatientName
+              - Sex
+              - DateOfBirth
+              - Race
+              - Ethnicity
+              - PreferredLanguage
+              - SmokingStatus
+              - Problems
+              - Medications
+              - MedicationAllergies
+              - LaboratoryTests
+              - LaboratoryValuesResults
+              - VitalSigns
+              - Procedures
+              - CareTeamMembers
+              - Immunizations
+              - UniqueDeviceIdentifiers
+              - AssessmentAndPlanOfTreatment
+              - Goals
+              - HealthConcerns
+        FromDate:
+          type: string
+          format: date
+          description: Start of the date filter window. Requires ToDate.
+        ToDate:
+          type: string
+          format: date
+          description: End of the date filter window. Requires FromDate.
+    PatientDataResponse:
+      type: object
+      properties:
+        ExternalReferencePatientId:
+          type: string
+        PatientCCDSXml:
+          type: string
+          description: Patient CCDS clinical data serialized as XML.
+        Meta:
+          type: object
+          additionalProperties: true
+        ValidationStatus:
+          type: string
+        ValidationMessages:
+          type: array
+          items:
+            type: string

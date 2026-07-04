@@ -1,0 +1,74 @@
+aid: rxnt
+url: https://raw.githubusercontent.com/api-evangelist/rxnt/refs/heads/main/apis.yml
+name: RXNT
+kind: company
+description: RXNT is a cloud-based, integrated healthcare software company offering
+  ONC-certified Electronic Health Records (EHR), EPCS-enabled electronic prescribing
+  (eRx), practice management, medical billing, scheduling, and a patient portal for
+  outpatient practices. Most of the RXNT platform is delivered as SaaS with no
+  broadly published developer API - product integrations (labs, radiology, billing
+  clearinghouses) are arranged privately with partners. The one documented, publicly
+  described API is the RXNT Clinical Data API (CDAPI), an ONC-mandated interface that
+  lets registered third-party applications retrieve a patient's Common Clinical Data
+  Set (CCDS). Access to the CDAPI is gated - third parties must register with RXNT
+  (support@rxnt.com) to receive credentials before calling it.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Healthcare
+- EHR
+- E-Prescribing
+- Clinical Data
+- ONC Certified
+- CCDS
+- Medical Billing
+- Practice Management
+created: '2026-07-04'
+modified: '2026-07-04'
+specificationVersion: '0.19'
+apis:
+- aid: rxnt:rxnt-clinical-data-api
+  name: RXNT Clinical Data API
+  tags:
+  - Clinical Data
+  - CCDS
+  - Patient Data
+  - ONC Certified
+  - Interoperability
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://github.com/RXNT/RxNTClinicalDataAPI
+  baseURL: https://app2.rxnt.com/MasterIndexExternalAPIServices/masterindexexternalapi/v1
+  properties:
+  - url: https://github.com/RXNT/RxNTClinicalDataAPI
+    type: Documentation
+  - url: https://github.com/RXNT/RxNTClinicalDataAPI
+    type: APIReference
+  - url: openapi/rxnt-openapi.yml
+    type: OpenAPI
+  description: ONC-certified interface (45 CFR 170.315(g)(7), (g)(8), and (g)(9))
+    that lets registered third-party applications and patient representatives
+    retrieve a patient's Common Clinical Data Set (CCDS) - demographics, problems,
+    medications, allergies, vital signs, lab results, immunizations, procedures,
+    care team, goals, health concerns, and implantable device identifiers.
+    Callers authenticate with RXNT-issued credentials to obtain a time-limited
+    token and signature, then request patient data (by category or in full) that
+    is returned as CCDS XML embedded in a JSON envelope. Access is partner-gated -
+    third parties must first register with RXNT (support@rxnt.com). The reference
+    repository has been archived read-only since December 2021.
+common:
+- type: GitHubOrganization
+  url: https://github.com/RXNT
+- type: LinkedIn
+  url: https://www.linkedin.com/company/rxnt
+- type: Website
+  url: https://www.rxnt.com/
+- type: Documentation
+  url: https://github.com/RXNT/RxNTClinicalDataAPI
+- type: Plans
+  url: plans/rxnt-plans-pricing.yml
+- type: Pricing
+  url: https://www.rxnt.com/pricing/
+- url: https://www.rxnt.com/blog/
+  type: Blog
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
