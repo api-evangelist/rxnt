@@ -55,6 +55,8 @@ apis:
     third parties must first register with RXNT (support@rxnt.com). The reference
     repository has been archived read-only since December 2021.
 common:
+- type: AgenticAccess
+  url: agentic-access/rxnt-agentic-access.yml
 - type: DomainSecurity
   url: security/rxnt-domain-security.yml
 - type: GitHubOrganization
