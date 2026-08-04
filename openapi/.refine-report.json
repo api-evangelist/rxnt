@@ -1,0 +1,16 @@
+{
+  "provider": "rxnt",
+  "sources": [
+    "rxnt-authentication-api-openapi.yml",
+    "rxnt-clinical-data-api-openapi.yml"
+  ],
+  "outputs": [
+    "rxnt-authentication-api-openapi.yml",
+    "rxnt-clinical-data-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
