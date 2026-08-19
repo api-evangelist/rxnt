@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "RXNT Clinical Data Authentication API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Authenticate a registered third-party client",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app2.rxnt.com/MasterIndexExternalAPIServices/masterindexexternalapi/v1/authentication/AuthenticateUser",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validates RXNT-issued username and password credentials and returns a time-limited Token, Signature, DoctorCompanyId, and token expiry details used to authenticate subsequent clinical data requests."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

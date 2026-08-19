@@ -1,0 +1,300 @@
+{
+  "item": [
+    {
+      "id": "64f1f106-cb21-4351-afa0-7379a18e0fd0",
+      "name": "Clinical Data",
+      "description": {
+        "content": "Retrieve patient CCDS clinical data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f8f1aeca-d1dd-48e8-89dd-8219158ee8b8",
+          "name": "Verify a patient and request CCDS data by category",
+          "request": {
+            "name": "Verify a patient and request CCDS data by category",
+            "description": {
+              "content": "Confirms that an ExternalReferencePatientId exists (satisfying 45 CFR 170.315(g)(7) Patient Selection) and returns the requested CCDS categories (satisfying (g)(8) Data Category Request). An optional FromDate / ToDate window filters the returned clinical data. Requires a valid Token and Signature obtained from AuthenticateUser.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "patientdashboard",
+                "patientccd",
+                "GetV1PatientInfoByExternalPatientId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"DoctorCompanyId\": \"<string>\",\n  \"Token\": \"<string>\",\n  \"Signature\": \"<string>\",\n  \"ExternalReferencePatientId\": \"<string>\",\n  \"RequestCompanyId\": \"<string>\",\n  \"Categories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"FromDate\": \"<date>\",\n  \"ToDate\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "92071d47-b220-4d8a-8137-1ab3c43008a9",
+              "name": "Patient CCDS data for the requested categories.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patientdashboard",
+                    "patientccd",
+                    "GetV1PatientInfoByExternalPatientId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DoctorCompanyId\": \"<string>\",\n  \"Token\": \"<string>\",\n  \"Signature\": \"<string>\",\n  \"ExternalReferencePatientId\": \"<string>\",\n  \"RequestCompanyId\": \"<string>\",\n  \"Categories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"FromDate\": \"<date>\",\n  \"ToDate\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ExternalReferencePatientId\": \"string\",\n  \"PatientCCDSXml\": \"string\",\n  \"Meta\": {\n    \"key_0\": 9440\n  },\n  \"ValidationStatus\": \"string\",\n  \"ValidationMessages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eacdb714-ca6c-4dd6-8cdd-247965a6cae7",
+              "name": "Missing or expired token/signature.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patientdashboard",
+                    "patientccd",
+                    "GetV1PatientInfoByExternalPatientId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DoctorCompanyId\": \"<string>\",\n  \"Token\": \"<string>\",\n  \"Signature\": \"<string>\",\n  \"ExternalReferencePatientId\": \"<string>\",\n  \"RequestCompanyId\": \"<string>\",\n  \"Categories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"FromDate\": \"<date>\",\n  \"ToDate\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2eeb80a0-ee15-4c15-be7c-31de0d2cd378",
+          "name": "Request all available CCDS data for a patient",
+          "request": {
+            "name": "Request all available CCDS data for a patient",
+            "description": {
+              "content": "Returns the complete Common Clinical Data Set for a patient (satisfying 45 CFR 170.315(g)(9) All Data Request). An optional FromDate / ToDate window filters the returned clinical data. Requires a valid Token and Signature obtained from AuthenticateUser.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "patientdashboard",
+                "patientccd",
+                "GetPatientCCDSData"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"DoctorCompanyId\": \"<string>\",\n  \"Token\": \"<string>\",\n  \"Signature\": \"<string>\",\n  \"ExternalReferencePatientId\": \"<string>\",\n  \"RequestCompanyId\": \"<string>\",\n  \"Categories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"FromDate\": \"<date>\",\n  \"ToDate\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "85af808d-f57b-4822-937e-0700b8c6c37c",
+              "name": "Complete patient CCDS data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patientdashboard",
+                    "patientccd",
+                    "GetPatientCCDSData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DoctorCompanyId\": \"<string>\",\n  \"Token\": \"<string>\",\n  \"Signature\": \"<string>\",\n  \"ExternalReferencePatientId\": \"<string>\",\n  \"RequestCompanyId\": \"<string>\",\n  \"Categories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"FromDate\": \"<date>\",\n  \"ToDate\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ExternalReferencePatientId\": \"string\",\n  \"PatientCCDSXml\": \"string\",\n  \"Meta\": {\n    \"key_0\": \"string\",\n    \"key_1\": 6808.8787436041575\n  },\n  \"ValidationStatus\": \"string\",\n  \"ValidationMessages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16bfcc20-7699-4224-a38d-e53f2500b768",
+              "name": "Missing or expired token/signature.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patientdashboard",
+                    "patientccd",
+                    "GetPatientCCDSData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DoctorCompanyId\": \"<string>\",\n  \"Token\": \"<string>\",\n  \"Signature\": \"<string>\",\n  \"ExternalReferencePatientId\": \"<string>\",\n  \"RequestCompanyId\": \"<string>\",\n  \"Categories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"FromDate\": \"<date>\",\n  \"ToDate\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app2.rxnt.com/MasterIndexExternalAPIServices/masterindexexternalapi/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4232294b-b700-4bb2-84e9-b365ab71583e",
+    "name": "RXNT Authentication Clinical Data API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "ONC-certified Clinical Data API (CDAPI) that exposes a patient's Common Clinical Data Set (CCDS) to registered third-party applications and patient representatives, fulfilling ONC 2015 Edition certification criteria 45 CFR 170.315(g)(7) Application Access - Patient Selection, (g)(8) Data Category Request, and (g)(9) All Data Request.\n\nAccess is partner-gated: third parties must first register with RXNT (support@rxnt.com) to receive login credentials. The AuthenticateUser operation returns a time-limited Token and Signature that must be supplied in the body of every subsequent request. Patient clinical data is returned as CCDS XML embedded (PatientCCDSXml) inside a JSON response envelope.\n\nModeled by API Evangelist from the publicly documented RXNT Clinical Data API reference (github.com/RXNT/RxNTClinicalDataAPI, archived 2021-12-17). Endpoint paths, methods, and field names reflect that documentation; request and response schemas below are honestly modeled from the documented fields.\n\nContact Support:\n Name: RXNT Support\n Email: support@rxnt.com",
+      "type": "text/plain"
+    }
+  }
+}

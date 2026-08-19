@@ -1,0 +1,163 @@
+{
+  "item": [
+    {
+      "id": "8a67062f-ad58-484c-ae2d-e42c46020b63",
+      "name": "Authentication",
+      "description": {
+        "content": "Obtain a time-limited token and signature.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8db1a64a-944c-4e73-bebf-fba579f819b2",
+          "name": "Authenticate a registered third-party client",
+          "request": {
+            "name": "Authenticate a registered third-party client",
+            "description": {
+              "content": "Validates RXNT-issued username and password credentials and returns a time-limited Token, Signature, DoctorCompanyId, and token expiry details used to authenticate subsequent clinical data requests.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "authentication",
+                "AuthenticateUser"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Username\": \"<string>\",\n  \"Password\": \"<password>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "50c68d46-ce31-44cf-a565-419714e2eb50",
+              "name": "Authentication result with token and signature.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authentication",
+                    "AuthenticateUser"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Username\": \"<string>\",\n  \"Password\": \"<password>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"AppLoginId\": \"string\",\n  \"DoctorCompanyId\": \"string\",\n  \"Token\": \"string\",\n  \"Signature\": \"string\",\n  \"TokenExpiryDate\": \"1965-07-02T22:05:22.885Z\",\n  \"NoOfDaysToExpire\": 165,\n  \"ValidationStatus\": \"string\",\n  \"ValidationMessages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e7d0987-5584-4bba-9650-61ef6085862f",
+              "name": "Invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authentication",
+                    "AuthenticateUser"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Username\": \"<string>\",\n  \"Password\": \"<password>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app2.rxnt.com/MasterIndexExternalAPIServices/masterindexexternalapi/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2f702b94-b3d6-44cf-a937-5a035ac3c042",
+    "name": "RXNT Clinical Data Authentication API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "ONC-certified Clinical Data API (CDAPI) that exposes a patient's Common Clinical Data Set (CCDS) to registered third-party applications and patient representatives, fulfilling ONC 2015 Edition certification criteria 45 CFR 170.315(g)(7) Application Access - Patient Selection, (g)(8) Data Category Request, and (g)(9) All Data Request.\n\nAccess is partner-gated: third parties must first register with RXNT (support@rxnt.com) to receive login credentials. The AuthenticateUser operation returns a time-limited Token and Signature that must be supplied in the body of every subsequent request. Patient clinical data is returned as CCDS XML embedded (PatientCCDSXml) inside a JSON response envelope.\n\nModeled by API Evangelist from the publicly documented RXNT Clinical Data API reference (github.com/RXNT/RxNTClinicalDataAPI, archived 2021-12-17). Endpoint paths, methods, and field names reflect that documentation; request and response schemas below are honestly modeled from the documented fields.\n\nContact Support:\n Name: RXNT Support\n Email: support@rxnt.com",
+      "type": "text/plain"
+    }
+  }
+}

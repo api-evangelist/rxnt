@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "RXNT Authentication Clinical Data API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Clinical Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Verify a patient and request CCDS data by category",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app2.rxnt.com/MasterIndexExternalAPIServices/masterindexexternalapi/v1/patientdashboard/patientccd/GetV1PatientInfoByExternalPatientId",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Confirms that an ExternalReferencePatientId exists (satisfying 45 CFR 170.315(g)(7) Patient Selection) and returns the requested CCDS categories (satisfying (g)(8) Data Category Request). An optional FromDate / ToDate window filters the returned clinical data. Requires a valid Token and Signature obtained from AuthenticateUser."
+        },
+        {
+          "info": {
+            "name": "Request all available CCDS data for a patient",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app2.rxnt.com/MasterIndexExternalAPIServices/masterindexexternalapi/v1/patientdashboard/patientccd/GetPatientCCDSData",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the complete Common Clinical Data Set for a patient (satisfying 45 CFR 170.315(g)(9) All Data Request). An optional FromDate / ToDate window filters the returned clinical data. Requires a valid Token and Signature obtained from AuthenticateUser."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
