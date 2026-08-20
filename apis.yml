@@ -28,6 +28,15 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/rxnt.png
 tags:
 - Healthcare
 - EHR
+- e-Prescribing
+- Clinical Data
+- ONC Certified
+- CCDS
+- Medical Billing
+- Practice Management
+tags_raw:
+- Healthcare
+- EHR
 - E-Prescribing
 - Clinical Data
 - ONC Certified
