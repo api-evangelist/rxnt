@@ -12,6 +12,18 @@ description: RXNT is a cloud-based, integrated healthcare software company offer
   lets registered third-party applications retrieve a patient's Common Clinical Data
   Set (CCDS). Access to the CDAPI is gated - third parties must register with RXNT
   (support@rxnt.com) to receive credentials before calling it.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: unknown
