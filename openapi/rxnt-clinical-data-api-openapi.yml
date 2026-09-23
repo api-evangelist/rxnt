@@ -1,14 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: RXNT Authentication Clinical Data API
+  title: RXNT Clinical Data API
   version: '1.0'
-  description: 'ONC-certified Clinical Data API (CDAPI) that exposes a patient''s Common Clinical Data Set (CCDS) to registered third-party applications and patient representatives, fulfilling ONC 2015 Edition certification criteria 45 CFR 170.315(g)(7) Application Access - Patient Selection, (g)(8) Data Category Request, and (g)(9) All Data Request.
-
-
-    Access is partner-gated: third parties must first register with RXNT (support@rxnt.com) to receive login credentials. The AuthenticateUser operation returns a time-limited Token and Signature that must be supplied in the body of every subsequent request. Patient clinical data is returned as CCDS XML embedded (PatientCCDSXml) inside a JSON response envelope.
-
-
-    Modeled by API Evangelist from the publicly documented RXNT Clinical Data API reference (github.com/RXNT/RxNTClinicalDataAPI, archived 2021-12-17). Endpoint paths, methods, and field names reflect that documentation; request and response schemas below are honestly modeled from the documented fields.'
+  description: ONC-certified Clinical Data API (CDAPI) that exposes a patient's Common Clinical Data Set (CCDS) to registered third-party applications and patient representatives, fulfilling ONC 2015 Edition certification criteria 45 CFR 170.315(g)(7) Application Access - Patient Selection, (g)(8) Data Category Request, and (g)(9) All Data Request.
   contact:
     name: RXNT Support
     email: support@rxnt.com
