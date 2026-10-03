@@ -39,6 +39,19 @@ paths:
           description: Invalid credentials.
 components:
   schemas:
+    AuthenticationRequest:
+      type: object
+      required:
+      - Username
+      - Password
+      properties:
+        Username:
+          type: string
+          description: RXNT-issued third-party client username.
+        Password:
+          type: string
+          format: password
+          description: RXNT-issued third-party client password.
     AuthenticationResponse:
       type: object
       properties:
@@ -63,16 +76,3 @@ components:
           type: array
           items:
             type: string
-    AuthenticationRequest:
-      type: object
-      required:
-      - Username
-      - Password
-      properties:
-        Username:
-          type: string
-          description: RXNT-issued third-party client username.
-        Password:
-          type: string
-          format: password
-          description: RXNT-issued third-party client password.
