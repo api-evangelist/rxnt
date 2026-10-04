@@ -61,23 +61,6 @@ paths:
           description: Missing or expired token/signature.
 components:
   schemas:
-    PatientDataResponse:
-      type: object
-      properties:
-        ExternalReferencePatientId:
-          type: string
-        PatientCCDSXml:
-          type: string
-          description: Patient CCDS clinical data serialized as XML.
-        Meta:
-          type: object
-          additionalProperties: true
-        ValidationStatus:
-          type: string
-        ValidationMessages:
-          type: array
-          items:
-            type: string
     PatientDataRequest:
       type: object
       required:
@@ -131,3 +114,20 @@ components:
           type: string
           format: date
           description: End of the date filter window. Requires FromDate.
+    PatientDataResponse:
+      type: object
+      properties:
+        ExternalReferencePatientId:
+          type: string
+        PatientCCDSXml:
+          type: string
+          description: Patient CCDS clinical data serialized as XML.
+        Meta:
+          type: object
+          additionalProperties: true
+        ValidationStatus:
+          type: string
+        ValidationMessages:
+          type: array
+          items:
+            type: string
