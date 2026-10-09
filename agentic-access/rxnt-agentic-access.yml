@@ -1,15 +1,17 @@
-generated: '2026-07-15'
+generated: '2026-09-23'
 method: generated
-source: openapi/rxnt-openapi.yml
+source: openapi/rxnt-authentication-api-openapi.yml, openapi/rxnt-clinical-data-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
   operations: 3
   by_action_class:
-    acting: 3
+    acting: 1
+    connected: 2
   by_consequence:
-    write: 3
+    write: 1
+    read: 2
   human_in_the_loop_required: 0
 operations:
 - path: /authentication/AuthenticateUser
@@ -32,31 +34,19 @@ operations:
   method: post
   operationId: getPatientInfoByExternalPatientId
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /patientdashboard/patientccd/GetPatientCCDSData
   method: post
   operationId: getPatientCCDSData
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none

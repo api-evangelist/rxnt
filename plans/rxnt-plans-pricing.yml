@@ -1,3 +1,7 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (undated — the file carries no date and git cannot supply one), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
 aid: rxnt:rxnt-plans-pricing
 name: RXNT Plans and Pricing
 description: >-
@@ -45,3 +49,38 @@ notes:
     access; contact support@rxnt.com to register and obtain credentials.
 source: https://www.rxnt.com/pricing/
 lastVerified: '2026-07-04'
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - subscription
+  units: []
+  plans:
+  - name: E-Prescribing
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods: []
+  - name: EHR Bundle
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods: []
+  - name: PM Bundle
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods: []
+  - name: Full Suite
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods: []
