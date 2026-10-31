@@ -1,4 +1,4 @@
-# RXNT (rxnt)
+# RXNT
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,77 +64,107 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-RXNT is a cloud-based, integrated healthcare software company offering ONC-certified Electronic Health Records (EHR), EPCS-enabled electronic prescribing (eRx), practice management, medical billing, scheduling, and a patient portal for outpatient practices. Most of the RXNT platform is delivered as SaaS with **no broadly published developer API** - product integrations (labs, radiology, billing clearinghouses) are arranged privately with partners.
+RXNT is a cloud-based, integrated healthcare software company offering ONC-certified Electronic Health Records (EHR), EPCS-enabled electronic prescribing (eRx), practice management, medical billing, scheduling, and a patient portal for outpatient practices. Most of the RXNT platform is delivered as SaaS with no broadly published developer API - product integrations (labs, radiology, billing clearinghouses) are arranged privately with partners. The one documented, publicly described API is the RXNT Clinical Data API (CDAPI), an ONC-mandated interface that lets registered third-party applications retrieve a patient's Common Clinical Data Set (CCDS). Access to the CDAPI is gated - third parties must register with RXNT (support@rxnt.com) to receive credentials before calling it.
 
-The one documented, publicly described API is the **RXNT Clinical Data API (CDAPI)**, an ONC-mandated interface that lets registered third-party applications retrieve a patient's Common Clinical Data Set (CCDS). **Access is partner-gated:** third parties must register with RXNT (support@rxnt.com) to receive credentials before calling it. The public reference repository has been archived read-only since December 2021.
+**Areas:** Healthcare · Electronic Health Records · e-Prescribing · Clinical Data · ONC Certified · CCDS · Medical Billing · Practice Management
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/rxnt/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/rxnt/refs/heads/main/apis.yml)
+## RXNT on APIs.io
 
-## Access Model
+Everything profiled for RXNT is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/rxnt/](https://apis.io/providers/rxnt/)** — or go straight to one of the APIs or properties below.
 
-- **Gated, not self-serve.** There is no open developer portal or self-service API key signup. To use the Clinical Data API, a third party must first register with RXNT (support@rxnt.com); RXNT then issues login credentials.
-- **Authentication.** Callers POST their username/password to `AuthenticateUser` and receive a time-limited `Token` and `Signature`, which must be included in the body of every subsequent request along with `DoctorCompanyId`.
-- **ONC-mandated scope.** The CDAPI exists to satisfy ONC 2015 Edition certification criteria for application access - Patient Selection (g)(7), Data Category Request (g)(8), and All Data Request (g)(9). It returns CCDS data as XML embedded in a JSON envelope.
-- **The rest of the platform (EHR, eRx, practice management, billing, scheduling, patient portal) has no documented public API.** Those are commercial SaaS products; integrations are handled through RXNT partnerships rather than an open API.
+### APIs (2)
 
-## Tags
+- [RXNT Authentication API](https://apis.io/apis/rxnt/rxnt-authentication-api/) — Obtain a time-limited token and signature.
+- [RXNT Clinical Data API](https://apis.io/apis/rxnt/rxnt-clinical-data-api/) — Retrieve patient CCDS clinical data.
 
-- Healthcare
-- EHR
-- E-Prescribing
-- Clinical Data
-- ONC Certified
-- CCDS
-- Medical Billing
-- Practice Management
+### Published properties
 
-## Timestamps
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-- **Created:** 2026-07-04
-- **Modified:** 2026-07-04
+#### Agentic access (1)
 
-## APIs
+Which operations an agent can call, which act, and which need a human in the loop.
 
-### RXNT Clinical Data API
+- [Rxnt Agentic Access](https://apis.io/agentic-access/rxnt/rxnt-agentic-access/)
 
-ONC-certified interface (45 CFR 170.315(g)(7), (g)(8), and (g)(9)) that lets registered third-party applications and patient representatives retrieve a patient's Common Clinical Data Set (CCDS) - demographics, problems, medications, allergies, vital signs, lab results, immunizations, procedures, care team, goals, health concerns, and implantable device identifiers. Callers authenticate with RXNT-issued credentials to obtain a time-limited token and signature, then request patient data (by category or in full) that is returned as CCDS XML embedded in a JSON envelope.
+#### Collections (2)
 
-- **Human URL:** [https://github.com/RXNT/RxNTClinicalDataAPI](https://github.com/RXNT/RxNTClinicalDataAPI)
-- **Base URL:** `https://app2.rxnt.com/MasterIndexExternalAPIServices/masterindexexternalapi/v1`
+Postman and Open Collection request collections.
 
-#### Tags
+- [RXNT Clinical Data Authentication API](https://apis.io/collections/rxnt/open-rxnt-authentication-api/)
+- [RXNT Authentication Clinical Data API](https://apis.io/collections/rxnt/open-rxnt-clinical-data-api/)
 
-- Clinical Data
-- CCDS
-- Patient Data
-- ONC Certified
-- Interoperability
+#### Security (1)
 
-#### Properties
+Authentication, trust centre, and vulnerability disclosure.
 
-- [Documentation](https://github.com/RXNT/RxNTClinicalDataAPI)
-- [API Reference](https://github.com/RXNT/RxNTClinicalDataAPI)
-- [OpenAPI](openapi/rxnt-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Rxnt Domain Security](https://apis.io/security/rxnt/rxnt-domain-security/)
 
-#### Documented Endpoints
+#### Plans and pricing (1)
 
-- `POST /authentication/AuthenticateUser` — authenticate and obtain a time-limited token and signature
-- `POST /patientdashboard/patientccd/GetV1PatientInfoByExternalPatientId` — verify a patient and request CCDS data by category (g7/g8)
-- `POST /patientdashboard/patientccd/GetPatientCCDSData` — request all available CCDS data for a patient (g9)
+Published plans, tiers and prices.
 
-> The OpenAPI definition models these three documented operations. Request and response schemas are honestly modeled from the field names in the RXNT reference (`x-endpoints-modeled: true`); the endpoint paths, methods, and CCDS categories are taken directly from RXNT's published documentation.
+- [Rxnt Plans Pricing](https://apis.io/plans/rxnt/rxnt-plans-pricing/)
 
-## Common Properties
+## Where to find this API
 
-- [GitHub Organization](https://github.com/RXNT)
-- [LinkedIn](https://www.linkedin.com/company/rxnt)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.rxnt.com/)
 - [Documentation](https://github.com/RXNT/RxNTClinicalDataAPI)
-- [Plans](plans/rxnt-plans-pricing.yml)
 - [Pricing](https://www.rxnt.com/pricing/)
 - [Blog](https://www.rxnt.com/blog/)
+- [GitHub](https://github.com/RXNT)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 24.1** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 45.9 |
+| Contract governance | 0.0 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 19.0 |
+| Access clarity | 18.4 |
+
+**Agent readiness 14.7** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 4.7** — Health
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/rxnt/](https://apis.io/providers/rxnt/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for RXNT: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/rxnt/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
